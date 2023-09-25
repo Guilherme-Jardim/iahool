@@ -11,6 +11,7 @@ export function Preview({ children, ...rest }: PreviewProps) {
       sx={{
         paddingRight: '0.5rem',
         overflow: 'hidden',
+        display: { xs: 'none', sm: 'flex' },
       }}
       {...rest}
     >
