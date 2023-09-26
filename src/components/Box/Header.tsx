@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react'
 import { Box, BoxProps } from '@mui/material'
 
-interface PreviewProps extends BoxProps {
+interface HeaderProps extends BoxProps {
   children: ReactNode
 }
 
-export function Preview({ children, ...rest }: PreviewProps) {
+export function Header({ children, ...rest }: HeaderProps) {
   return <Box {...rest}>{children}</Box>
 }

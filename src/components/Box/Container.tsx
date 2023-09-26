@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { Box, BoxProps } from '@mui/material';
+import React, { ReactNode } from 'react'
+import { Box, BoxProps } from '@mui/material'
 
 interface ContainerProps extends BoxProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export function Container({ children, ...rest }: ContainerProps) {
@@ -12,7 +12,6 @@ export function Container({ children, ...rest }: ContainerProps) {
         maxWidth: 'calc(100vw - (100vw - 1160px) / 2)',
         height: '100vh',
         marginLeft: 'auto',
-        background: 'red',
         display: 'flex',
         alignItems: 'center',
         gap: '5rem',
@@ -21,5 +20,5 @@ export function Container({ children, ...rest }: ContainerProps) {
     >
       {children}
     </Box>
-  );
+  )
 }
