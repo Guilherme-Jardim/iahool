@@ -6,5 +6,9 @@ interface HeaderProps extends BoxProps {
 }
 
 export function Header({ children, ...rest }: HeaderProps) {
-  return <Box {...rest}>{children}</Box>
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column' }} {...rest}>
+      {children}
+    </Box>
+  )
 }

@@ -1,60 +1,57 @@
-import { Button, TextInput, Text } from '@ignite-ui/react'
+import { Button, Text, TextInput } from '@ignite-ui/react'
 import { ArrowRight } from 'phosphor-react'
-import { useForm, useFieldArray } from 'react-hook-form'
-import { z } from 'zod'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FormAnnotation } from '../Form/FormAnnotation/FormAnnotation'
+import { z } from 'zod'
 import { Form } from '../Form/Form'
+import { FormAnnotation } from '../Form/FormAnnotation/FormAnnotation'
+import { useRouter } from 'next/router'
 
-const claimUsernameFormSchema = z.object({
+const ClaimUsernameFormSchema = z.object({
   username: z
     .string()
-    .min(3, { message: 'Username precisa ter pelo menos 3 caracteres' })
+    .min(3, { message: 'O usuário precisa ter pelo menos 3 letras.' })
     .regex(/^([a-z\\-]+)$/i, {
-      message: 'Username pode ter apenas letras e hífens',
+      message: 'O usuário pode ter apenas letras e hifens.',
     })
     .transform((username) => username.toLowerCase()),
 })
 
-type CLaimUsernameFormData = z.infer<typeof claimUsernameFormSchema>
+type ClaimUsernameFormData = z.infer<typeof ClaimUsernameFormSchema>
 
 export function ClaimUsernameForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<CLaimUsernameFormData>({
-    resolver: zodResolver(claimUsernameFormSchema),
+    formState: { errors, isSubmitting },
+  } = useForm<ClaimUsernameFormData>({
+    resolver: zodResolver(ClaimUsernameFormSchema),
   })
 
-  async function handleClaimUsername(data: CLaimUsernameFormData) {
-    console.log(data)
+  const router = useRouter()
+
+  async function handleClaimUsername(data: ClaimUsernameFormData) {
+    const { username } = data
+
+    router.push(`/register?username=${username}`)
   }
 
   return (
     <>
-      <Form
-        sx={{
-          display: 'grid',
-          gap: '$2',
-          marginTop: '$4',
-          padding: '$4',
-          gridTemplateColumns: { xs: '1fr', sm: '1fr auto' },
-        }}
-        onSubmit={handleSubmit(handleClaimUsername)}
-      >
+      <Form onSubmit={handleSubmit(handleClaimUsername)}>
         <TextInput
           crossOrigin={ClaimUsernameForm}
           size="sm"
           prefix="ignite.com/"
-          placeholder="seu-usuario"
+          placeholder="seu-usuário"
           {...register('username')}
         />
-        <Button size="sm" type="submit">
-          Reservar usuário
+        <Button size="sm" type="submit" disabled={isSubmitting}>
+          Reservar
           <ArrowRight />
         </Button>
       </Form>
+
       <FormAnnotation>
         <Text size="sm">
           {errors.username

@@ -12,18 +12,7 @@ export function Container({
   ...rest
 }: ContainerProps) {
   return (
-    <Box
-      component={component}
-      sx={{
-        maxWidth: 'calc(100vw - (100vw - 1160px) / 2)',
-        height: '100vh',
-        marginLeft: 'auto',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '5rem',
-      }}
-      {...rest}
-    >
+    <Box component={component} {...rest}>
       {children}
     </Box>
   )

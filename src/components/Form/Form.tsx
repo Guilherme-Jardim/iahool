@@ -6,7 +6,7 @@ interface FormPropss extends BoxProps {
   component?: 'div' | 'form'
 }
 
-export function Form({ children, component = 'div', ...rest }: FormPropss) {
+export function Form({ children, component = 'form', ...rest }: FormPropss) {
   return (
     <Box component={component} {...rest}>
       {children}
