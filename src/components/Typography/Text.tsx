@@ -1,8 +1,8 @@
-import { Typography, TypographyProps } from '@mui/material';
-import React from 'react';
+import { Typography, TypographyProps } from '@mui/material'
+import React from 'react'
 
 interface TextProps extends TypographyProps {
-  text: string;
+  text: string
 }
 
 export function Text({ text, ...rest }: TextProps) {
@@ -16,5 +16,5 @@ export function Text({ text, ...rest }: TextProps) {
     >
       {text}
     </Typography>
-  );
+  )
 }

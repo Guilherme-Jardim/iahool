@@ -1,10 +1,10 @@
 import { Button, TextInput, Text } from '@ignite-ui/react'
 import { ArrowRight } from 'phosphor-react'
-import { Form } from '../Form/Form'
-import { useForm } from 'react-hook-form'
+import { useForm, useFieldArray } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormAnnotation } from '../Form/FormAnnotation/FormAnnotation'
+import { Form } from '../Form/Form'
 
 const claimUsernameFormSchema = z.object({
   username: z
@@ -27,26 +27,20 @@ export function ClaimUsernameForm() {
     resolver: zodResolver(claimUsernameFormSchema),
   })
 
-  async function handleClaimUsername(data: any) {
+  async function handleClaimUsername(data: CLaimUsernameFormData) {
     console.log(data)
   }
-
-  
 
   return (
     <>
       <Form
-        style={{
+        sx={{
           display: 'grid',
-          gridTemplateColumns: '1fr auto',
           gap: '$2',
           marginTop: '$4',
           padding: '$4',
-          @media(max-width: 900px) {
-            gridTemplateColumns: '1fr',
-          },
+          gridTemplateColumns: { xs: '1fr', sm: '1fr auto' },
         }}
-        as="form"
         onSubmit={handleSubmit(handleClaimUsername)}
       >
         <TextInput
