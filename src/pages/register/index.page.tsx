@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
 import { api } from '../../lib/axios'
 import { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 
 const registerFormSchema = z.object({
   username: z
@@ -49,6 +50,8 @@ export default function Register() {
     }
   }, [query, setValue])
 
+  const router = useRouter()
+
   async function handleRegister(data: RegisterFormData) {
     try {
       const user = await api.post('/users', {
@@ -57,6 +60,8 @@ export default function Register() {
       })
 
       console.log('Usuário criado:', user)
+
+      await router.push('/register/connect-calendar')
     } catch (err) {
       if (err instanceof AxiosError && err?.response?.data?.message) {
         alert(err.response.data.message)
@@ -96,7 +101,7 @@ export default function Register() {
       <Form
         component="form"
         sx={{
-          padding: '0.35rem',
+          padding: '0.5rem',
           borderRadius: '5px',
           background: '#302e2e',
           display: 'flex',

@@ -1,24 +1,25 @@
 import React, { ReactNode } from 'react'
 import { Box, BoxProps } from '@mui/material'
 
-interface ContainerProps extends BoxProps {
+interface ConnectBoxProps extends BoxProps {
   children: ReactNode
   component?: 'div' | 'main'
 }
 
-export function Container({
+export function ConnectBox({
   children,
   component = 'div',
   ...rest
-}: ContainerProps) {
+}: ConnectBoxProps) {
   return (
     <Box
       sx={{
+        padding: '0.5rem',
+        borderRadius: '5px',
+        background: '#302e2e',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1rem',
-        maxWidth: '30rem',
-        margin: '7rem auto auto auto',
+        gap: '0.5rem',
       }}
       component={component}
       {...rest}
